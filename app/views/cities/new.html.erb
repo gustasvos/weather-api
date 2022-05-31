@@ -1,0 +1,5 @@
+<%= form_with url: "/locations", method: :post do |form| %>
+  <%= form.label :name, "Search for:" %>
+  <%= form.text_field :name %>
+  <%= form.submit "Search" %>
+<% end %>
