@@ -6,7 +6,7 @@
 
   <div>
     <%= form.label :date, "Select a a date:", style: "display: block" %>
-    <%= form.date_field :date, 1.week.ago.strftime("%Y-%m-%d") .. Date.today.strftime("%Y-%m-%d")%>
+    <%= form.date_field :date %>
   </div>
     <%= form.submit "Search" %>
 <% end %>

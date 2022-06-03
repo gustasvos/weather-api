@@ -1,5 +1,4 @@
 class CitiesController < ApplicationController
-
     def new
     end
 
@@ -8,11 +7,11 @@ class CitiesController < ApplicationController
 
     def get_locations
         city = params[:name]
-        key = Rails.application.credentials.api[:key]
         date = params[:date]
+        key = Rails.application.credentials.api[:key]
         url = "https://api.weatherapi.com/v1/history.json?key=#{key}&q=#{city}&dt=#{date}"
-        @response = RestClient.get(url)
-        # p @response.body
-        render json: @response.body, status: :ok
+        response = RestClient.get(url)
+        a = JSON.parse(response.body)
+        render json: a["location"]["name"], status: :ok
     end
 end
