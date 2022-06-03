@@ -1,5 +1,12 @@
 <%= form_with url: "/locations", method: :post do |form| %>
-  <%= form.label :name, "Search for:" %>
-  <%= form.text_field :name %>
-  <%= form.submit "Search" %>
+  <div>
+    <%= form.label :name, "Search for:", style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :date, "Select a a date:", style: "display: block" %>
+    <%= form.date_field :date, 1.week.ago.strftime("%Y-%m-%d") .. Date.today.strftime("%Y-%m-%d")%>
+  </div>
+    <%= form.submit "Search" %>
 <% end %>
