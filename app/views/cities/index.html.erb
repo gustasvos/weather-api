@@ -1,8 +1,18 @@
 <h1>Dia: <%= params[:date] %></h1>
 
-<p>Nome da cidade: <%= @a[:location]['name'] %></p>
-<p>País: <%= @a[:location]['country'] %></p>
-<p>Mínima: <%= @a[:forecast]['forecastday'][0]['day']['mintemp_c'] %> °C</p>
-<p>Máxima: <%= @a[:forecast]['forecastday'][0]['day']['maxtemp_c'] %> °C</p>
-<img src=<%= @a[:forecast]['forecastday'][0]['day']['condition']['icon'] %>>
+<p>Nome da cidade: <%= @response[:location]['name'] %></p>
+<p>País: <%= @response[:location]['country'] %></p>
+<p>Mínima: <%= @response[:forecast]['forecastday'][0]['day']['mintemp_c'] %> °C</p>
+<p>Máxima: <%= @response[:forecast]['forecastday'][0]['day']['maxtemp_c'] %> °C</p>
+<img src=<%= @response[:forecast]['forecastday'][0]['day']['condition']['icon'] %>>
 
+<% day = @response[:forecast]['forecastday'][0]['hour'] %>
+<% for i in 0..day.length-1 do %>
+    <% hour = day[i]['time'] %>
+    <% hour.slice!(params[:date]) %>
+    <% temp = day[i]['temp_c'] %>
+    <% image = day[i]['condition']['icon']%>
+    <h1>Hora: <%= hour %></h1>
+    <p>Temperatura: <%= temp %></p>
+    <img src=<%= image %>>
+<% end %>
