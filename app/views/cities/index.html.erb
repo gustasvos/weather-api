@@ -1,0 +1,8 @@
+<h1>Dia: <%= params[:date] %></h1>
+
+<p>Nome da cidade: <%= @a[:location]['name'] %></p>
+<p>País: <%= @a[:location]['country'] %></p>
+<p>Mínima: <%= @a[:forecast]['forecastday'][0]['day']['mintemp_c'] %> °C</p>
+<p>Máxima: <%= @a[:forecast]['forecastday'][0]['day']['maxtemp_c'] %> °C</p>
+<img src=<%= @a[:forecast]['forecastday'][0]['day']['condition']['icon'] %>>
+

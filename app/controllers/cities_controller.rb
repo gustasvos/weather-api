@@ -11,7 +11,7 @@ class CitiesController < ApplicationController
         key = Rails.application.credentials.api[:key]
         url = "https://api.weatherapi.com/v1/history.json?key=#{key}&q=#{city}&dt=#{date}"
         response = RestClient.get(url)
-        a = JSON.parse(response.body)
-        render json: a["location"]["name"], status: :ok
+        @a = JSON.parse(response.body).symbolize_keys
+        render :index, status: :unprocessable_entity
     end
 end
