@@ -1,18 +1,38 @@
-<h1>Dia: <%= params[:date] %></h1>
+<div class="mb-5">
+    <h1>Date: <%= Date.today.to_date %></h1>
+    <p>City: <%= @responsec[:location]['name'] %></p>
+    <p>Country: <%= @responsec[:location]['country'] %></p>
+    <% if params[:date] == Date.today.to_s %>
+        <p>Temperature: <%= @responsec[:current]['temp_c'].ceil %> °C</p>
+    <% else %>
+        <p>Max: <%= @responseh[:forecast]['forecastday'][0]['day']['maxtemp_c'].ceil %> °C</p>
+        <p>Min: <%= @responseh[:forecast]['forecastday'][0]['day']['mintemp_c'].ceil %> °C</p>
+    <% end %>
+    <img src=<%= @responseh[:forecast]['forecastday'][0]['day']['condition']['icon'] %>>    
+</div>
 
-<p>Nome da cidade: <%= @response[:location]['name'] %></p>
-<p>País: <%= @response[:location]['country'] %></p>
-<p>Mínima: <%= @response[:forecast]['forecastday'][0]['day']['mintemp_c'] %> °C</p>
-<p>Máxima: <%= @response[:forecast]['forecastday'][0]['day']['maxtemp_c'] %> °C</p>
-<img src=<%= @response[:forecast]['forecastday'][0]['day']['condition']['icon'] %>>
-
-<% day = @response[:forecast]['forecastday'][0]['hour'] %>
-<% for i in 0..day.length-1 do %>
-    <% hour = day[i]['time'] %>
-    <% hour.slice!(params[:date]) %>
-    <% temp = day[i]['temp_c'] %>
-    <% image = day[i]['condition']['icon']%>
-    <h1>Hora: <%= hour %></h1>
-    <p>Temperatura: <%= temp %></p>
-    <img src=<%= image %>>
-<% end %>
+<div>
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">Hour</th>
+                <th scope="col">Temperature</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% day = @responseh[:forecast]['forecastday'][0]['hour'] %>
+            <% for i in 0..day.length-1 do %>
+                <% hour = day[i]['time'] %>
+                <% hour.slice!(params[:date]) %>
+                <% temp = day[i]['temp_c'].ceil %>
+                <% image = day[i]['condition']['icon']%>
+                <tr>
+                    <td><%= hour %></td>
+                    <td><%= temp %>°C</td>
+                    <td><img src=<%= image %>></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
