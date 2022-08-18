@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :cities
-  post '/locations', to: "cities#get_locations"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get '/error', to: 'cities#error'
+  post '/locations', to: "cities#index"
+  root "cities#new"
 end
